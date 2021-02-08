@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import me.olvrti.api.domain.Product;
 import me.olvrti.api.repositories.ProductRepository;
+import me.olvrti.api.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ProductService {
@@ -16,6 +17,9 @@ public class ProductService {
 
 	public Product findById(Integer id) {
 		Optional<Product> obj = repository.findById(id);
-		return obj.orElse(null);
+
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+			"Object not found! " + id
+		));
 	}
 }

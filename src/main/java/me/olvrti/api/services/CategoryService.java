@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import me.olvrti.api.domain.Category;
 import me.olvrti.api.repositories.CategoryRepository;
+import me.olvrti.api.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoryService {
@@ -16,6 +17,9 @@ public class CategoryService {
 
 	public Category findById(Integer id) {
 		Optional<Category> obj = repository.findById(id);
-		return obj.orElse(null);
+
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+			"Object not found! " + id
+		));
 	}
 }
