@@ -5,18 +5,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import me.olvrti.api.domain.Category;
-import me.olvrti.api.repositories.CategoryRepository;
+import me.olvrti.api.domain.State;
+import me.olvrti.api.repositories.StateRepository;
 import me.olvrti.api.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class CategoryService {
+public class StateService {
 
 	@Autowired
-	private CategoryRepository repository;
+	private StateRepository repository;
 
-	public Category findById(Integer id) {
-		Optional<Category> obj = repository.findById(id);
+	public State findById(Integer id) {
+		Optional<State> obj = repository.findById(id);
 
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! " + id));
 	}

@@ -18,8 +18,6 @@ public class ProductService {
 	public Product findById(Integer id) {
 		Optional<Product> obj = repository.findById(id);
 
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-			"Object not found! " + id
-		));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! " + id));
 	}
 }
