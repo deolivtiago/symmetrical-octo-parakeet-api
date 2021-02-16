@@ -14,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import me.olvrti.api.domain.enums.CustomerType;
 
@@ -28,16 +28,18 @@ public class Customer implements Serializable {
 	private String name;
 	private String identifier;
 	private String email;
-
 	private Integer type;
 
-	@JsonManagedReference
 	@OneToMany(mappedBy = "customer")
 	private List<Address> addresses = new ArrayList<>();
 
 	@ElementCollection
 	@CollectionTable(name = "phone")
 	private Set<String> phones = new HashSet<>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "customer")
+	private List<PurchaseOrder> purchaseOrders = new ArrayList<>();
 
 	public Customer() {
 	}
@@ -104,6 +106,14 @@ public class Customer implements Serializable {
 
 	public void setPhones(Set<String> phones) {
 		this.phones = phones;
+	}
+
+	public List<PurchaseOrder> getPurchaseOrders() {
+		return purchaseOrders;
+	}
+
+	public void setPurchaseOrders(List<PurchaseOrder> purchaseOrders) {
+		this.purchaseOrders = purchaseOrders;
 	}
 
 	@Override

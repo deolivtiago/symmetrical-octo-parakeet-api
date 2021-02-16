@@ -9,8 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Address implements Serializable {
@@ -24,12 +23,11 @@ public class Address implements Serializable {
 	private String complement;
 	private Integer postalCode;
 
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
 
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;

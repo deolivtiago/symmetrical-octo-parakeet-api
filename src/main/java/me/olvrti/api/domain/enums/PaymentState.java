@@ -1,13 +1,14 @@
 package me.olvrti.api.domain.enums;
 
-public enum CustomerType {
+public enum PaymentState {
 
-	NATURALPERSON(1, "Natural Person"), JURIDICALPERSON(2, "Juridical Person");
+	CREATED(1, "Created"), HOLDING(2, "Holding"), PAID(3, "Paid"), SHIPPED(4, "Shipped"), DELIVERED(5, "Delivered"),
+	CLOSED(6, "Closed"), CANCELED(7, "Canceled");
 
 	private Integer id;
 	private String description;
 
-	private CustomerType(Integer id, String description) {
+	private PaymentState(Integer id, String description) {
 		this.id = id;
 		this.description = description;
 	}
@@ -28,12 +29,12 @@ public enum CustomerType {
 		this.description = description;
 	}
 
-	public static CustomerType toEnum(Integer id) {
+	public static PaymentState toEnum(Integer id) {
 		if (id == null) {
 			return null;
 		}
 
-		for (CustomerType value : CustomerType.values()) {
+		for (PaymentState value : PaymentState.values()) {
 			if (value.id == id) {
 				return value;
 			}
